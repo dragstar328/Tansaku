@@ -13,6 +13,7 @@
           {% csrf_token %}
           <button type="submit" class="btn btn-primary">Search</button>
         </form>
+        <a class="btn btn-secondary" href="{% url 'rebuild_model' %}" role="button">Rebuild Model</a>
       </div>
     </div>
 
@@ -26,12 +27,14 @@
 		      <th>#</th>
 		      <th>Word</th>
 		      <th>Rate</td>
+		      <th>Count</td>
 		    </tr>
 		    {% for res in similars %}
 		    <tr>
 		      <td>{{ forloop.counter }}</td>
 		      <td><a href="/?word_param={{ res.0 }}" class="btn btn-primary">{{ res.0 }}</a></td>
 		      <td>{{ res.1 }}</td>
+		      <td style="text-align: right">{{ res.2 }}</td>
 		    </tr>
 		    {% endfor %}
 		  </table>
@@ -42,11 +45,13 @@
 		    <tr class="table-success">
 		      <th>#</th>
 		      <th>Word</th>
+		      <th>Count</th>
 		    </tr>
 		    {% for res in clusters %}
 		    <tr>
 		      <td>{{ forloop.counter }}</td>
-		      <td><a href="/?word_param={{ res }}" class="btn btn-primary">{{ res }}</a></td>
+		      <td><a href="/?word_param={{ res.0 }}" class="btn btn-primary">{{ res.0 }}</a></td>
+		      <td style="text-align: right">{{ res.1 }}</td>
 		    </tr>
 		    {% endfor %}
 		  </table>
